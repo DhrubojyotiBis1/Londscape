@@ -15,6 +15,15 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func createNewProjectButtonPressed(_ sender:UIButton){
+        performSegue(withIdentifier: "goToPopUpVC", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToPopUpVC"{
+            
+        }
+    }
 
 }
 
