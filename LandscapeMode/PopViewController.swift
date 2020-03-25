@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PopViewControllerProtocol {
+    func actionButtonPressed(withTag tag :Int?)
+}
+
 class PopViewController: UIViewController {
     
     @IBOutlet weak var potraitView:UIView!
@@ -19,6 +23,7 @@ class PopViewController: UIViewController {
     @IBOutlet weak var popView:UIView!
     
     var selectedCatagoryTag:Int!
+    var delegate:PopViewControllerProtocol?
     
 
     override func viewDidLoad() {
@@ -26,6 +31,12 @@ class PopViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.setup()
+    }
+    
+    @IBAction func BttonPressed(_ sender:UIButton){
+        self.dismiss(animated: true) {
+            self.delegate?.actionButtonPressed(withTag: self.selectedCatagoryTag)
+        }
     }
 
 }

@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var selectedCatagoryTag:Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +23,22 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToPopUpVC"{
-            
+            let destination = segue.destination as! PopViewController
+            destination.delegate = self
+        }else if segue.identifier == "goToFinalView"{
+            let destination = segue.destination as! FinalViewController
+            destination.selectedCatagoryTag = self.selectedCatagoryTag!
         }
     }
 
+}
+
+extension ViewController:PopViewControllerProtocol{
+    func actionButtonPressed(withTag tag: Int?) {
+        self.selectedCatagoryTag = tag
+        if tag != nil{
+            performSegue(withIdentifier: "goToFinalView", sender: nil)
+        }
+    }
 }
 
